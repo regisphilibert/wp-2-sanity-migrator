@@ -1,11 +1,13 @@
 # WP → Sanity Migrator
 
-Scripts for pulling content out of a WordPress site (via the WordPress.com REST API, `v1.1`) and turning it into a Sanity dataset import (`.ndjson`).
+Template for pulling content out of a WordPress site and turning it into a Sanity dataset import (`.ndjson`). Works against both a self-hosted WordPress REST API (`wp-json/wp/v2`) and the WordPress.com `v1.1` API — `utils/fetch.js` detects which shape a response is in automatically.
+
+To spin out a new exporter from this template for a new site: copy the repo, then follow Setup below.
 
 ## Setup
 
-1. **Config file.** Copy [data/config.example.js](data/config.example.js) to `data/config.<your-project>.js` and fill in the real values (domain, WooCommerce keys, event/venue endpoints — see the comments in the example file). This file holds live credentials, so it must stay out of git.
-   - Every script that talks to WordPress imports this file directly by path (`utils/fetch.js`, `getters/venues.js`, `utils/getVariationsEndpoints.js`, `output.js`, `data/collections.js`). There's no central switch yet — to point the project at a different WordPress site, update the import path in each of those files to your `data/config.<project>.js`.
+1. **Config file.** Copy [data/config.example.js](data/config.example.js) to `data/config.js` and fill in the real values (domain, WooCommerce keys, event/venue endpoints — see the comments in the example file). `data/config.js` is gitignored — every script that talks to WordPress imports it from that same fixed path, so there's nothing else to wire up.
+   - Not sure what `domain` should be, or what post types/endpoints a given site exposes? Run `node listPostTypes.js` once the domain is set (see Scripts below).
 2. **Sanity env vars.** Create a `.env` (gitignored) with:
    ```
    SANITY_STUDIO_PROJECT_ID=
@@ -30,12 +32,14 @@ Scripts for pulling content out of a WordPress site (via the WordPress.com REST 
 | `npm run dataset:delete` | — | **Destructive.** Deletes the `production` dataset via the Sanity CLI. Confirm the dataset name before running. |
 | `node storeMedia.js` | `storeMedia.js` | Pages through the WP `media` endpoint (100/page) and writes each page to `data/media/store_N.json`, stopping automatically once a page comes back short. Run this periodically to refresh the media snapshot that [utils/getMedia.js](utils/getMedia.js) resolves `id → Sanity asset ref` from. |
 | `node storeReviews.js` | `storeReviews.js` | Same pattern as `storeMedia.js`, but for the `sm_reviews` custom post type, writing to `data/reviews/store_N.json`. Backs [utils/getReviews.js](utils/getReviews.js), which looks up reviews related to a given author/book id. |
+| `node listPostTypes.js` | `listPostTypes.js` | Diagnostic script for spinning out a new project: lists every post type registered on the site pointed to by `data/config.js`'s `domain`, with the actual REST endpoint slug to use for each (which can differ from the type name, e.g. `nav_menu_item` → `menu-items`). Works against both self-hosted and wp.com sites. Run this first when wiring up `data/collections.js` for a new site. |
 
-`storeMedia.js` and `storeReviews.js` aren't wrapped in npm scripts — run them directly with `node`.
+`storeMedia.js`, `storeReviews.js`, and `listPostTypes.js` aren't wrapped in npm scripts — run them directly with `node`.
 
 ### Typical flow
 
 ```
+node listPostTypes.js     # (new project) discover available post types/endpoints
 node storeMedia.js        # refresh media snapshot (occasionally)
 node storeReviews.js      # refresh reviews snapshot (occasionally)
 npm run gen                # produce sanity_export.json / .ndjson

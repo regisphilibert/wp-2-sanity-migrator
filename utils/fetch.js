@@ -10,31 +10,35 @@ export default async (endpoint) => {
   }
   url = `${domain}/${url}`
 
-  const cached = await cache.read(endpoint)
+  const cached = await cache.read(url)
   if(cached) {
-    console.log(`getting cached ${endpoint} OK (${strToHash(endpoint)})`)
+    console.log(`getting cached ${endpoint} OK (${strToHash(url)})`)
     return JSON.parse(cached)
   } else {
     console.log(`fetching ${endpoint}`)
   }
   const res = await fetch(url);
   if (res.ok) {
-      let data = await res.json();
-      if(typeof data == "object" && !Array.isArray(data)) {
-        if(typeof data.events !== "undefined") {
-          data = data.events
-        } else if(typeof data.venues !== "undefined") {
-          data = data.venues
-        } else {
-          data = [data]
-        }
-      }
-      let output = data
+      const data = await res.json();
+      let output
       if(Array.isArray(data)) {
-        output = data[0].posts
+        // Self-hosted WP REST API (wp-json/wp/v2) and WooCommerce return the
+        // collection as a plain array directly.
+        output = data
+      } else if(typeof data.events !== "undefined") {
+        // The Events Calendar plugin (same shape on wp.com and self-hosted).
+        output = data.events
+      } else if(typeof data.venues !== "undefined") {
+        output = data.venues
+      } else if(typeof data.posts !== "undefined") {
+        // WordPress.com v1.1 API wraps collections as { found, posts: [...] }.
+        output = data.posts
+      } else {
+        // Single-entry response (e.g. fetching one page/post by id).
+        output = [data]
       }
       console.log(`fetched ${endpoint} OK`)
-      cache.write(endpoint, output)
+      cache.write(url, output)
       return output
   } else {
     console.log(url, 'nope...')

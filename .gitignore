@@ -33,3 +33,11 @@ cached
 sanity_export.json
 sanity_export_readable.json
 sanity_export.ndjson
+data/config.rscdsmtl.js
+
+# project-specific media/review snapshots (see storeMedia.js / storeReviews.js)
+# — keep the directories in git, ignore everything generated inside them
+data/media/*
+!data/media/.keep
+data/reviews/*
+!data/reviews/.keep
