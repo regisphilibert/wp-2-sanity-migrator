@@ -1,4 +1,4 @@
-import config from './config.js'
+import config from './config.rscdsmtl.js'
 import transformerPost from '../transformers/post.js'
 import transformerPerson from '../transformers/person.js'
 import transformerEvent from '../transformers/event.js'

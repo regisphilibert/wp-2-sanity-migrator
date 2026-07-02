@@ -22,6 +22,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# project-specific credentials (see data/config.example.js)
+data/config.js
+
 # macOS-specific files
 .DS_Store
 .netlify
@@ -30,3 +33,4 @@ cached
 sanity_export.json
 sanity_export_readable.json
 sanity_export.ndjson
+data/config.rscdsmtl.js

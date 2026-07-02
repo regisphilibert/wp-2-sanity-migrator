@@ -1,4 +1,4 @@
-import config from '../data/config.js'
+import config from '../data/config.rscdsmtl.js'
 import cache from './cache.js'
 import strToHash from './strToHash.js'
 

@@ -1,4 +1,4 @@
-import config from '../data/config.js'
+import config from '../data/config.rscdsmtl.js'
 
 const { woo_params, woo_endpoint } = config
 export default async () => {
