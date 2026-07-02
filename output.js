@@ -1,4 +1,4 @@
-import config from './data/config.rscdsmtl.js'
+import config from './data/config.js'
 import getTitle from './utils/getTitle.js'
 //import getVariationsEndpoints from './utils/getVariationsEndpoints.js'
 

@@ -1,4 +1,4 @@
-import config from '../data/config.rscdsmtl.js'
+import config from '../data/config.js'
 import fetchPages from './fetchPages.js'
 
 const { woo_params, woo_endpoint } = config

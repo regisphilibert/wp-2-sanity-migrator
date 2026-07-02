@@ -8,7 +8,7 @@
   "scripts": {
     "gen": "node export.js && cat ./sanity_export.json | json2nd > ./sanity_export.ndjson",
     "export:output": "node output.js",
-    "export:test": "node migrate/test.js",
+    "export:test": "node test.js",
     "export": "sanity dataset import ./sanity_export.ndjson staging --allow-failing-assets --replace",
     "dataset:delete": "sanity dataset delete production"
   },
