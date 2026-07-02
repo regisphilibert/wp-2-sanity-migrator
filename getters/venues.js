@@ -1,6 +1,7 @@
-const fetch = require("../utils/fetch.js").default
-const transformer = require('../transformers/venue.js')
-const config = require('../data/config.rscdsmtl.js')
+import fetch from '../utils/fetch.js'
+import transformer from '../transformers/venue.js'
+import config from '../data/config.rscdsmtl.js'
+
 export default async () => {
   const events = await fetch(config.event_endpoint)
   let processed_venues =  []

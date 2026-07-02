@@ -1,7 +1,8 @@
-const fetch = require("../utils/fetch.js").default
-const base = require('../transformers/base.js')
-const rels = require('../transformers/rels.js')
-const GetSourcesFromString = require("../utils/GetSourcesFromString.js").default
+import fetch from '../utils/fetch.js'
+import base from '../transformers/base.js'
+import rels from '../transformers/rels.js'
+import getSourcesFromString from '../utils/getSourcesFromString.js'
+
 export default async () => {
   const [entry] = await fetch('pages/23')
   let galleries = []
@@ -13,7 +14,7 @@ export default async () => {
   for (const endpoint of gallery_pages_endoints) {
     const [page] = await fetch(endpoint)
     if(page.content.rendered){
-      sources = GetSourcesFromString(page.content.rendered)
+      const sources = getSourcesFromString(page.content.rendered)
       galleries.push({
         title: page.title.rendered,
         images: sources.map(src => ({

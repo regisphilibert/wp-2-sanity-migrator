@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from 'fs'
 const filepath = "./sanity_export.json"
 
 function jsonReader(filePath, cb) {
@@ -14,7 +14,7 @@ function jsonReader(filePath, cb) {
     }
   });
 }
-check_duplicated_ids = (data) => {
+const check_duplicated_ids = (data) => {
   data.map(document => {
     const duplicate = data.find(_document => (document._id == _document._id && document != _document))
     if(duplicate) {
@@ -23,7 +23,7 @@ check_duplicated_ids = (data) => {
   })
 }
 
-check_relationships = (data) => {
+const check_relationships = (data) => {
   data.map(document => {
     let fields = [
       'venue',
