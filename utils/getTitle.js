@@ -24,6 +24,10 @@ export default (titleInput) => {
     {
       pattern: /&#8217;/g,
       replacement: '’'
+    },
+    {
+      pattern: /&#8211;/g,
+      replacement: "-"
     }
   ]
   let title = titleInput

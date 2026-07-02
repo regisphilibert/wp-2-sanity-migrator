@@ -1,20 +1,21 @@
 export default {
   deserialize(el, next, block) {
-    if(typeof el.tagName == "undefined") {
-      return undefined
-    }
-    if (el.tagName !== 'audio' && el.className != "wp-audio-shortcode") {
-      return undefined
-    }
-    const source = el.querySelector('source')
-    const src = source.getAttribute('src')
-    if(src) {
-      return block({
-        _type: 'blockAudio',
-        file: {
-          _sanityAsset: `file@https://brentanoquartet.com/${src}`,
-        }
-      })
-    }
-  },
-}
+  if (typeof el.tagName == "undefined") {
+    return undefined
+  }
+
+  if (el.tagName.toLowerCase() != 'a') {
+    return undefined
+  }
+  const href = el.getAttribute("href")
+  if (href && href.endsWith('.mp3')) {
+    return block({
+      _type: 'pt.audio',
+      file: {
+        _sanityAsset: `file@${href}`,
+      }
+    })
+  } else {
+    return undefined
+  }
+}}

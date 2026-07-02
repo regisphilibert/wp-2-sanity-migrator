@@ -50,7 +50,7 @@ const post = {
   type: 'post',
   transformer: transformerPost,
   endpoints: [
-    ['posts?per_page=100', 4],
+    'posts?after=2025-10-30',
   ]
 }
 
@@ -154,7 +154,7 @@ const review = {
 
 
 const collections = async () => ([
-  home,
+  //home,
   //page,
   post,
   //person,

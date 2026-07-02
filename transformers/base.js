@@ -13,10 +13,10 @@ export default  (entry, type) => {
     file = getMedia(file_id)
   }
   return {
-    _id: getID(entry.id, type),
+    _id: getID(entry.ID, type),
     _type: type,
     title: getTitle(entry.title),
-    publishedAt: formatDate(entry.date_gmt),
+    publishedAt: formatDate(entry.date),
     ...(!!image ? {image} : {}),
     ...(file ? {file} : {}),
     //enableSharing,
@@ -24,9 +24,9 @@ export default  (entry, type) => {
       _type: 'slug',
       current: entry.slug
     },
-    ...(entry.content ? {body: generatePortableText(entry.content.rendered)} : {}),
-    ...(entry.description ? {description: generatePortableText(entry.description.rendered)} :
-      entry.excerpt ? {description: generatePortableText(entry.excerpt.rendered)} : {}
+    ...(entry.content ? {body: generatePortableText(entry.content)} : {}),
+    ...(entry.description ? {description: generatePortableText(entry.description)} :
+      entry.excerpt ? {description: generatePortableText(entry.excerpt)} : {}
   )
   }
 }

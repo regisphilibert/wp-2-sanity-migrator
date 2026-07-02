@@ -8,23 +8,23 @@ What We want to return
 
 export default {
   deserialize(el, next, block) {
-    if(typeof el.tagName == "undefined") {
+    if (typeof el.tagName == "undefined") {
       return undefined
     }
 
     if (el.tagName.toLowerCase() != 'a') {
       return undefined
     }
-    let public
+    let publicSrc
     const href = el.getAttribute("href")
-    if(!href.startsWith('/uploads/') ){
+    if (!href.startsWith('/uploads/')) {
       return undefined
     } else {
-      public = `https://www.sarahweinman.com/${href}`
+      publicSrc = href.replace('https://shanendoah.wpenginepowered.com/', '/')
     }
     return block({
       _type: "file",
-      _sanityAsset: `file@${public}`,
+      _sanityAsset: `file@${publicSrc}`,
     })
-  },
+  }
 }

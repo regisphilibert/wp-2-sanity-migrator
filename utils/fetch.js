@@ -3,12 +3,13 @@ import cache from './cache.js'
 import strToHash from './strToHash.js'
 
 export default async (endpoint) => {
-  let url = `/wp/v2/${endpoint}`
+  let url = endpoint
   const { domain } = config
   if(endpoint.includes('tribe') || endpoint.includes('/wc/')) {
     url = endpoint
   }
-  url = `${domain}${url}`
+  url = `${domain}/${url}`
+
   const cached = await cache.read(endpoint)
   if(cached) {
     console.log(`getting cached ${endpoint} OK (${strToHash(endpoint)})`)
@@ -29,6 +30,9 @@ export default async (endpoint) => {
         }
       }
       let output = data
+      if(Array.isArray(data)) {
+        output = data[0].posts
+      }
       console.log(`fetched ${endpoint} OK`)
       cache.write(endpoint, output)
       return output

@@ -1,5 +1,5 @@
-import books_1 from '../data/books_1.json' assert {type: 'json'}
-import books_2 from '../data/books_2.json' assert {type: 'json'}
+import books_1 from '../data/books_1.json' with { type: "json" }
+import books_2 from '../data/books_2.json' with { type: "json" }
 const books = [
   ...books_1,
   ...books_2,

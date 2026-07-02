@@ -9,8 +9,9 @@ export default  (entry, type) => {
   }
   return {
     ...base(entry, type),
+    description: undefined,
     //association,
     //...(entry.tags ? {taxonomyTags: rels(entry.tags, 'taxonomyTag')} : {}),
-    ...(entry.categories ? {taxonomyCategories: rels(entry.categories, 'taxonomyCategory')} : {})
+   // ...(entry.categories ? {taxonomyCategories: rels(entry.categories, 'taxonomyCategory')} : {})
   }
 }
