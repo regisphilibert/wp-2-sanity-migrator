@@ -1,9 +1,9 @@
 import config from '#config'
+import about from './about.js'
 import page from './page.js'
 import post from './post.js'
 import person from './person.js'
 import event from './event.js'
-import venue from './venue.js'
 import book from './book.js'
 import bookEdition from './bookEdition.js'
 import review from './review.js'
@@ -20,11 +20,11 @@ import taxonomyBookTag from './taxonomyBookTag.js'
 // which of these actually run for a given project is controlled entirely
 // by config.js, not by editing this file.
 const registry = {
+  about,
   page,
   post,
   person,
   event,
-  venue,
   book,
   bookEdition,
   review,

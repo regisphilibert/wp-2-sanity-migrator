@@ -2,13 +2,15 @@ import config from '#config'
 import generatePortableText from '#pt/generatePortableText.js'
 import getReviews from '#utils/getReviews.js'
 import getTermType from '#utils/getTermType.js'
-import getWPBook from '#utils/getWPBook.js'
 import base from '#transformers/base.js'
 import rel from '#transformers/rel.js'
 import rels from '#transformers/rels.js'
 
 const { woo_params, woo_endpoint } = config
 
+// pageCount/subtitle/persons aren't handled here — the previous project
+// sourced them from an ACF field group on the WP post that won't exist on a
+// fresh site. See transformers/_examples/acf.js for that mapping.
 const transformer = (entry, type) => {
   let output = {...base(entry, type)}
 
@@ -62,29 +64,6 @@ const transformer = (entry, type) => {
   const reviews = getReviews(entry.id)
   if(!!reviews) {
     output.reviews = rels(reviews, 'review')
-  }
-
-  const wpBook = getWPBook(entry.id)
-  if(wpBook) {
-
-
-    if(wpBook.acf) {
-      const {
-        sm_book_page_count: pageCount,
-        related_author: author,
-        book_subtitle: subtitle,
-      } = wpBook.acf
-
-      if(!!pageCount) {
-        output.pageCount = parseInt(pageCount)
-      }
-      if(!!author) {
-       output.persons = rels(author, 'person')
-      }
-      if(!!subtitle) {
-        output.subtitle = subtitle
-      }
-    }
   }
 
   return output

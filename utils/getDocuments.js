@@ -1,14 +1,16 @@
 import fetch from "./fetch.js"
 import fetchPages from "./fetchPages.js"
+import * as progress from "./cli/progress.js"
 
 export default async function(collection) {
   let documents = []
   let entries = []
   const { type = 'unknown', getter = null, pages = null, endpoints = [], transformer = null } = collection
+  progress.start(type)
   if(getter) {
     entries = await getter()
     documents.push(...entries)
-    console.log(`${type} OK, with ${documents.length} entries`)
+    progress.finish(documents.length)
     return documents
   }
   let fetches = endpoints
@@ -23,6 +25,6 @@ export default async function(collection) {
     }
     documents.push(...entries)
   }
-  console.log(`${type} OK, with ${documents.length} entries`)
+  progress.finish(documents.length)
   return documents
 }

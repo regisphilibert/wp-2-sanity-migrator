@@ -21,12 +21,9 @@ export default {
 
   // Endpoint (relative to `domain`) for The Events Calendar plugin's events.
   // The `start_date` param limits how far back events are fetched.
-  // Omit/adjust this (and `venue_endpoint` below) if the site doesn't use
-  // The Events Calendar / Event Tickets plugin.
+  // Omit/adjust if the site doesn't use The Events Calendar / Event Tickets
+  // plugin.
   event_endpoint: '/tribe/events/v1/events?start_date=1990-01-01',
-
-  // Endpoint (relative to `domain`) for The Events Calendar plugin's venues.
-  venue_endpoint: '/tribe/events/v1/venues.js',
 
   // Base path for the WooCommerce REST API. Omit/adjust if the site doesn't
   // sell products through WooCommerce.
@@ -41,10 +38,16 @@ export default {
 
   // Which data/collections/*.js entries to run for this project, by name.
   // See the registry in data/collections/index.js for the full list of
-  // available names (post, page, event, venue, book, review, taxonomy*, ...).
+  // available names (about, post, page, event, book, review, taxonomy*, ...).
   enabled_collections: [
     'post',
   ],
+
+  // Top-level fields to strip from every fetched entry, applied regardless
+  // of which collection/endpoint returned them. Useful for plugin-added
+  // fields that bloat every response but are never used here — e.g. Yoast
+  // SEO's `yoast_head`/`yoast_head_json`. Leave empty/omit if not needed.
+  excluded_fields: ['yoast_head', 'yoast_head_json'],
 
   // --- Below: knobs read by specific data/collections/*.js files. Only ---
   // --- fill in the ones for collections you actually enabled above.    ---

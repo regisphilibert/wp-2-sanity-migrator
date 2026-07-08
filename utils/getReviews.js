@@ -1,7 +1,7 @@
-import loadStoreFiles from './loadStoreFiles.js'
-
-const reviews = loadStoreFiles('reviews')
+// Relating a review back to its author/book has no generic implementation:
+// the previous project matched them via an ACF field on the review entry.
+// See transformers/_examples/acf.js for that mapping — re-implement the
+// match here (via `loadStoreFiles('reviews')`) if the new project needs it.
 export default (id) => {
-  const reviewsFound = reviews.filter(r => r.acf && r.acf.related_author_or_book && r.acf.related_author_or_book.includes(id))
-  return reviewsFound.length && reviewsFound.map(r => r.id)
+  return false
 }

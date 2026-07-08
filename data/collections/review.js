@@ -1,8 +1,10 @@
 import generatePortableText from '#pt/generatePortableText.js'
 import formatDate from '#utils/formatDate.js'
 import getID from '#utils/getID.js'
-import getTitle from '#utils/getTitle.js'
 
+// Attribution/source-link fields aren't handled here — the previous project
+// sourced them from an ACF field group that won't exist on a fresh site.
+// See transformers/_examples/acf.js for that mapping.
 const transformer = (entry, type) => {
   const output = {
     _type: 'review',
@@ -20,14 +22,6 @@ const transformer = (entry, type) => {
 
   if(!!body) {
     output.body = generatePortableText(body)
-  }
-
-  if(entry.acf) {
-    const { attribution, link_to_original: link } = entry.acf
-    output.title = getTitle(attribution)
-    if(!!link) {
-      output.url = link
-    }
   }
 
   return output

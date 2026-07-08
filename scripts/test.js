@@ -26,7 +26,6 @@ const check_duplicated_ids = (data) => {
 const check_relationships = (data) => {
   data.map(document => {
     let fields = [
-      'venue',
       'taxonomyTags',
       'persons',
       'authors',
