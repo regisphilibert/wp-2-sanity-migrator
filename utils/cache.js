@@ -1,5 +1,4 @@
 import { writeFile as _writeFile, existsSync, readFileSync } from "fs";
-import strToHash from "./strToHash.js";
 
 const writeFile = (documents, filepath, readable = false) => {
   _writeFile(filepath, JSON.stringify(documents,  null, readable ? "\t" : null), err => {

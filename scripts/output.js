@@ -1,4 +1,3 @@
-import config from '#config'
 import getTitle from '#utils/getTitle.js'
 
 const run = async () => {
