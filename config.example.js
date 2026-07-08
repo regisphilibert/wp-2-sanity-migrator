@@ -37,5 +37,31 @@ export default {
   woo_params: new URLSearchParams({
     consumer_key: woo_consumer_key,
     consumer_secret: woo_consumer_secret
-  })
+  }),
+
+  // Which data/collections/*.js entries to run for this project, by name.
+  // See the registry in data/collections/index.js for the full list of
+  // available names (post, page, event, venue, book, review, taxonomy*, ...).
+  enabled_collections: [
+    'post',
+  ],
+
+  // --- Below: knobs read by specific data/collections/*.js files. Only ---
+  // --- fill in the ones for collections you actually enabled above.    ---
+
+  // WP page IDs to leave out of the `page` collection.
+  // page_excluded_ids: [4, 6, 7],
+
+  // WP page IDs that must be included in the `page` collection regardless
+  // of other filtering (not read by the current `page` collection, but
+  // available for a project that needs it).
+  // page_included_ids: [609, 665],
+
+  // Only migrate posts published after this date (YYYY-MM-DD). Omit to
+  // pull all posts.
+  // post_after: '2025-01-01',
+
+  // WooCommerce product_cat term IDs that make up the `taxonomyGenre`
+  // collection.
+  // taxonomyGenre_ids: [363, 50],
 }

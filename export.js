@@ -1,6 +1,6 @@
 
 import fs from "fs"
-import collections from "./data/collections.js"
+import collections from "./data/collections/index.js"
 import getDocuments from './utils/getDocuments.js'
 const filepath = "./sanity_export.json"
 

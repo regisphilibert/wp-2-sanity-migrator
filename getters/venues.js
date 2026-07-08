@@ -1,6 +1,6 @@
-import fetch from '../utils/fetch.js'
-import transformer from '../transformers/venue.js'
-import config from '../data/config.js'
+import fetch from '#utils/fetch.js'
+import { transformer } from '../data/collections/venue.js'
+import config from '#config'
 
 export default async () => {
   const events = await fetch(config.event_endpoint)

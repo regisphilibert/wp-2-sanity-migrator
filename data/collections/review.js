@@ -1,9 +1,9 @@
-import generatePortableText from '../pt/generatePortableText.js'
-import formatDate from '../utils/formatDate.js'
-import getID from '../utils/getID.js'
-import getTitle from '../utils/getTitle.js'
+import generatePortableText from '#pt/generatePortableText.js'
+import formatDate from '#utils/formatDate.js'
+import getID from '#utils/getID.js'
+import getTitle from '#utils/getTitle.js'
 
-export default  (entry, type) => {
+const transformer = (entry, type) => {
   const output = {
     _type: 'review',
     title: entry.title,
@@ -31,4 +31,12 @@ export default  (entry, type) => {
   }
 
   return output
+}
+
+export default {
+  type: 'review',
+  transformer,
+  endpoints: [
+    ['sm_reviews?per_page=100']
+  ]
 }

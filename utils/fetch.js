@@ -1,8 +1,8 @@
-import config from '../data/config.js'
+import config from '#config'
 import cache from './cache.js'
 import strToHash from './strToHash.js'
 
-export default async (endpoint) => {
+export default async (endpoint, { cache: useCache = true } = {}) => {
   let url = endpoint
   const { domain } = config
   if(endpoint.includes('tribe') || endpoint.includes('/wc/')) {
@@ -10,13 +10,14 @@ export default async (endpoint) => {
   }
   url = `${domain}/${url}`
 
-  const cached = await cache.read(url)
-  if(cached) {
-    console.log(`getting cached ${endpoint} OK (${strToHash(url)})`)
-    return JSON.parse(cached)
-  } else {
-    console.log(`fetching ${endpoint}`)
+  if (useCache) {
+    const cached = await cache.read(url)
+    if(cached) {
+      console.log(`getting cached ${endpoint} OK (${strToHash(url)})`)
+      return JSON.parse(cached)
+    }
   }
+  console.log(`fetching ${endpoint}`)
   const res = await fetch(url);
   if (res.ok) {
       const data = await res.json();
@@ -38,7 +39,7 @@ export default async (endpoint) => {
         output = [data]
       }
       console.log(`fetched ${endpoint} OK`)
-      cache.write(url, output)
+      if (useCache) cache.write(url, output)
       return output
   } else {
     console.log(url, 'nope...')

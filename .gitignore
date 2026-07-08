@@ -22,8 +22,8 @@ pnpm-debug.log*
 .env
 .env.production
 
-# project-specific credentials (see data/config.example.js)
-data/config.js
+# project-specific credentials (see config.example.js)
+config.js
 
 # macOS-specific files
 .DS_Store
@@ -33,11 +33,13 @@ cached
 sanity_export.json
 sanity_export_readable.json
 sanity_export.ndjson
-data/config.rscdsmtl.js
+config.rscdsmtl.js
 
-# project-specific media/review snapshots (see storeMedia.js / storeReviews.js)
+# project-specific media/review/book snapshots (see storeMedia.js / storeReviews.js / storeBooks.js)
 # — keep the directories in git, ignore everything generated inside them
 data/media/*
 !data/media/.keep
 data/reviews/*
 !data/reviews/.keep
+data/books/*
+!data/books/.keep

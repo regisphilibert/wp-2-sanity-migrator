@@ -14,7 +14,7 @@ export default async function(collection) {
   let fetches = endpoints
   for (const endpoint of fetches) {
     if(typeof endpoint == "object") {
-      entries = await fetchPages(endpoint[0], endpoint[1])
+      entries = await fetchPages(endpoint[0])
     } else {
       entries = await fetch(endpoint)
     }

@@ -1,4 +1,4 @@
-import config from './data/config.js'
+import config from '#config'
 
 // Self-hosted WordPress (wp-json/wp/v2): GET {domain}/types
 // -> object keyed by slug: { post: { name, slug, rest_base, ... }, ... }

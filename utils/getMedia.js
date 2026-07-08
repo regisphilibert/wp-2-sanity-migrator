@@ -1,16 +1,6 @@
-import store_1 from '../data/media/store_1.json' with { type: "json" };
-import store_2 from '../data/media/store_2.json' with { type: "json" };
-import store_3 from '../data/media/store_3.json' with { type: "json" };
-import store_4 from '../data/media/store_4.json' with { type: "json" };
-import store_5 from '../data/media/store_5.json' with { type: "json" };
+import loadStoreFiles from './loadStoreFiles.js'
 
-const medias = [
-  ...store_1,
-  ...store_2,
-  ...store_3,
-  ...store_4,
-  ...store_5
-]
+const medias = loadStoreFiles('media')
 
 export default (id) => {
   const media = medias.find(entry => entry.id == id)

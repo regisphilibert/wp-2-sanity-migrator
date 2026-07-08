@@ -1,13 +1,15 @@
+import config from '#config'
+import generatePortableText from '#pt/generatePortableText.js'
+import getReviews from '#utils/getReviews.js'
+import getTermType from '#utils/getTermType.js'
+import getWPBook from '#utils/getWPBook.js'
+import base from '#transformers/base.js'
+import rel from '#transformers/rel.js'
+import rels from '#transformers/rels.js'
 
-import generatePortableText from '../pt/generatePortableText.js'
-import getReviews from '../utils/getReviews.js'
-import getTermType from '../utils/getTermType.js'
-import getWPBook from '../utils/getWPBook.js'
-import base from './base.js'
-import rel from './rel.js'
-import rels from './rels.js'
+const { woo_params, woo_endpoint } = config
 
-export default (entry, type) => {
+const transformer = (entry, type) => {
   let output = {...base(entry, type)}
 
   const {
@@ -86,4 +88,12 @@ export default (entry, type) => {
   }
 
   return output
+}
+
+export default {
+  type: 'book',
+  transformer,
+  endpoints: [
+    [`${woo_endpoint}/products?${woo_params}&per_page=100`]
+  ]
 }

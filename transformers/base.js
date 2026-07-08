@@ -1,8 +1,8 @@
-import generatePortableText from '../pt/generatePortableText.js'
-import getMedia from '../utils/getMedia.js'
-import getID from '../utils/getID.js'
-import getTitle from '../utils/getTitle.js'
-import formatDate from '../utils/formatDate.js'
+import generatePortableText from '#pt/generatePortableText.js'
+import getMedia from '#utils/getMedia.js'
+import getID from '#utils/getID.js'
+import getTitle from '#utils/getTitle.js'
+import formatDate from '#utils/formatDate.js'
 
 export default  (entry, type) => {
   const image = entry.featured_media && getMedia(entry.featured_media)

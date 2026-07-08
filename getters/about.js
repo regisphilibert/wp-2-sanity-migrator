@@ -1,7 +1,7 @@
-import fetch from '../utils/fetch.js'
-import base from '../transformers/base.js'
-import rels from '../transformers/rels.js'
-import getSourcesFromString from '../utils/getSourcesFromString.js'
+import fetch from '#utils/fetch.js'
+import base from '#transformers/base.js'
+import rels from '#transformers/rels.js'
+import getSourcesFromString from '#utils/getSourcesFromString.js'
 
 export default async () => {
   const [entry] = await fetch('pages/23')

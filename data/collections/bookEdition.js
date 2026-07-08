@@ -1,7 +1,7 @@
-
-import getID from '../utils/getID.js'
-import getMedia from '../utils/getMedia.js'
-import getWPBook from '../utils/getWPBook.js'
+import getID from '#utils/getID.js'
+import getMedia from '#utils/getMedia.js'
+import getWPBook from '#utils/getWPBook.js'
+import getVariationsEndpoints from '#utils/getVariationsEndpoints.js'
 
 const getBinding = (string) => {
   const mapping = {
@@ -16,7 +16,7 @@ const getBinding = (string) => {
   return output
 }
 
-export default  (entry, type) => {
+const transformer = (entry, type) => {
   const output = {
     _id: getID(entry.id, type),
     _type: type,
@@ -50,3 +50,9 @@ export default  (entry, type) => {
   }
   return output
 }
+
+export default async () => ({
+  type: 'bookEdition',
+  transformer,
+  endpoints: await getVariationsEndpoints()
+})

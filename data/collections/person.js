@@ -1,13 +1,13 @@
-import generatePortableText from '../pt/generatePortableText.js'
-import getReviews from '../utils/getReviews.js'
-import base from './base.js'
-import rels from './rels.js'
+import generatePortableText from '#pt/generatePortableText.js'
+import getReviews from '#utils/getReviews.js'
+import base from '#transformers/base.js'
+import rels from '#transformers/rels.js'
 
 const undefinedIfEmpty = (value) => {
   return value !== "" ? value : undefined
 }
 
-export default  (entry, type) => {
+const transformer = (entry, type) => {
   const bottom = base(entry, type)
   delete bottom.publishedAt
   const { acf: {
@@ -37,4 +37,12 @@ export default  (entry, type) => {
   }
 
   return output
+}
+
+export default {
+  type: 'person',
+  transformer,
+  endpoints: [
+    'sm_authors?per_page=100'
+  ]
 }

@@ -1,10 +1,10 @@
-import generatePortableText from '../pt/generatePortableText.js'
-import getMedia from '../utils/getMedia.js'
-import getID from '../utils/getID.js'
-import formatDate from '../utils/formatDate.js'
-import rel from './rel.js'
+import generatePortableText from '#pt/generatePortableText.js'
+import getMedia from '#utils/getMedia.js'
+import getID from '#utils/getID.js'
+import formatDate from '#utils/formatDate.js'
+import rel from '#transformers/rel.js'
 
-export default  (entry, type) => {
+const transformer = (entry, type) => {
   const image = entry.featured_media && getMedia(entry.featured_media)
   const time_start = formatDate(entry.start_date)
   const time_end = formatDate(entry.end_date)
@@ -28,4 +28,12 @@ export default  (entry, type) => {
     }: {})
   }
   return output
+}
+
+export default {
+  type: 'event',
+  transformer,
+  endpoints: [
+    ['events?per_page=100'],
+  ]
 }
